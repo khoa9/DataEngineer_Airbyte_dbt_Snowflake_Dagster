@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: snowflake_src
+    database: AIRBYTE_DATABASE
+    schema: SOURCE
+
+    tables:
+      - name: src_countryregion
+      - name: src_customer
+      - name: src_emailaddress
+      - name: src_product
+      - name: src_productcategory
+      - name: src_productdescription
+      - name: src_productsubcategory
+      - name: src_salesorderdetail
+      - name: src_salesperson
+      - name: src_salespersonquotahistory
+      - name: src_salesterritory
+      - name: src_salesterritoryhistory

@@ -1,0 +1,330 @@
+version: 2
+
+models:
+
+# stg_countryregion
+  - name: stg_countryregion
+    description: "A staging model for the country region data. This model selects country region code and name from the source."
+    columns:
+      - name: country_region_code
+        description: "The code that represents the country or region."
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: "The name of the country or region."
+        tests:
+          - not_null
+
+# stg_customer
+  - name: stg_customer
+    description: "A staging model for customer data, selecting necessary columns from the source."
+    columns:
+      - name: customer_id
+        description: "The unique identifier for a customer."
+        tests:
+          - unique
+          - not_null
+
+      - name: person_id
+        description: "The ID that represents the person associated with the customer."
+
+      - name: account_number
+        description: "The customer's account number."
+        tests:
+          - unique
+
+      - name: store_id
+        description: "The ID of the store associated with the customer."
+
+      - name: territory_id
+        description: "The ID of the sales territory the customer is associated with."
+
+# stg_emailaddress
+  - name: stg_emailaddress
+    description: "A staging model for email address data, selecting necessary columns from the source."
+    columns:
+      - name: email_address_id
+        description: "The unique identifier for each email address."
+        tests:
+          - unique
+          - not_null 
+
+      - name: business_entity_id
+        description: "The ID of the business entity associated with the email address."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+      - name: email_address
+        description: "The actual email address of the entity."
+
+# stg_product
+  - name: stg_product
+    description: "A staging model for product data, selecting necessary columns from the source."
+    columns:
+      - name: product_id
+        description: "The unique identifier for each product."
+        tests:
+          - unique
+          - not_null  
+
+      - name: class
+        description: "The class of the product (e.g., High, Medium, Low)."
+
+      - name: color
+        description: "The color of the product."
+
+      - name: days_to_manufacture
+        description: "The number of days required to manufacture the product."
+
+      - name: discontinued_date
+        description: "The date when the product was discontinued."
+
+      - name: finished_good_flag
+        description: "Flag indicating if the product is a finished good."
+
+      - name: list_price
+        description: "The list price of the product."
+
+      - name: make_flag
+        description: "Flag indicating if the product is manufactured in-house."
+
+      - name: name
+        description: "The name of the product."
+
+      - name: product_line
+        description: "The line to which the product belongs (e.g., R for Road)."
+
+      - name: product_model_id
+        description: "The identifier for the product model."
+
+      - name: product_number
+        description: "The product number used for identification."
+
+      - name: product_subcategory_id
+        description: "The identifier for the product subcategory."
+
+      - name: reorder_point
+        description: "The inventory level at which the product should be reordered."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+      - name: safety_stock_level
+        description: "The minimum quantity of stock needed to avoid stockouts."
+
+      - name: sell_end_date
+        description: "The date when the product is no longer available for sale."
+
+      - name: sell_start_date
+        description: "The date when the product becomes available for sale."
+
+      - name: size
+        description: "The size of the product."
+
+      - name: size_unit_measure_code
+        description: "The unit of measure code for the product size (e.g., CM for centimeters)."
+
+      - name: standard_cost
+        description: "The standard cost to manufacture the product."
+
+      - name: style
+        description: "The style of the product (e.g., U for Unisex)."
+
+      - name: weight
+        description: "The weight of the product."
+
+      - name: weight_unit_measure_code
+        description: "The unit of measure code for the product weight (e.g., LB for pounds)."
+
+# stg_productcategory
+  - name: stg_productcategory
+    description: "A staging model for product category data, selecting necessary columns from the source."
+    columns:
+      - name: product_category_id
+        description: "The unique identifier for each product category."
+        tests:
+          - unique
+          - not_null  
+
+      - name: name
+        description: "The name of the product category."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+# stg_productdescription
+  - name: stg_productdescription
+    description: "A staging model for product description data, selecting necessary columns from the source."
+    columns:
+      - name: product_description_id
+        description: "The unique identifier for each product description."
+        tests:
+          - unique
+          - not_null  
+
+      - name: description
+        description: "The description of the product."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+# stg_productsubcategory
+  - name: stg_productsubcategory
+    description: "A staging model for product subcategory data, selecting necessary columns from the source."
+    columns:
+      - name: product_subcategory_id
+        description: "The unique identifier for each product subcategory."
+        tests:
+          - unique
+          - not_null  
+
+      - name: product_category_id
+        description: "The identifier for the related product category."
+
+      - name: name
+        description: "The name of the product subcategory."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+# stg_salesorderdetail
+  - name: stg_salesorderdetail
+    description: "A staging model for sales order detail data, selecting necessary columns from the source."
+    columns:
+      - name: sales_order_detail_id
+        description: "The unique identifier for each sales order detail."
+        tests:
+          - unique
+          - not_null  
+
+      - name: sales_order_id
+        description: "The identifier for the sales order associated with this detail."
+
+      - name: special_offer_id
+        description: "The identifier for the special offer associated with this sales order detail."
+
+      - name: unit_price
+        description: "The price per unit of the product."
+
+      - name: unit_price_discount
+        description: "The discount applied to the unit price."
+
+      - name: carrier_tracking_number
+        description: "The tracking number of the carrier handling the order shipment."
+
+      - name: line_total
+        description: "The total price for the sales order line item."
+
+      - name: order_quantity
+        description: "The quantity of products ordered."
+
+      - name: product_id
+        description: "The identifier of the product in the order."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+# stg_salesperson
+  - name: stg_salesperson
+    description: "A staging model for salesperson data, selecting necessary columns from the source."
+    columns:
+      - name: business_entity_id
+        description: "The unique identifier for the business entity representing the salesperson."
+        tests:
+          - unique
+          - not_null 
+
+      - name: bonus
+        description: "The bonus amount awarded to the salesperson."
+
+      - name: commission_pct
+        description: "The commission percentage earned by the salesperson."
+
+      - name: sales_last_year
+        description: "The total sales achieved by the salesperson in the previous year."
+
+      - name: sales_quota
+        description: "The sales quota assigned to the salesperson."
+
+      - name: sales_ytd
+        description: "The year-to-date sales achieved by the salesperson."
+
+      - name: territory_id
+        description: "The identifier of the sales territory assigned to the salesperson."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+# stg_salespersonquotahistory
+  - name: stg_salespersonquotahistory
+    description: "A staging model for salesperson quota history data, selecting necessary columns from the source."
+    columns:
+      - name: business_entity_id
+        description: "The unique identifier for the business entity representing the salesperson."
+        tests:
+          - unique
+          - not_null  
+
+      - name: quota_date
+        description: "The date when the sales quota was set."
+
+      - name: sales_quota
+        description: "The sales quota assigned to the salesperson."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+# stg_salesterritory
+  - name: stg_salesterritory
+    description: "A staging model for sales territory data, selecting necessary columns from the source."
+    columns:
+      - name: territory_id
+        description: "The unique identifier for the sales territory."
+        tests:
+          - unique
+          - not_null  
+
+      - name: cost_last_year
+        description: "The total cost incurred in the territory during the previous year."
+
+      - name: cost_ytd
+        description: "The year-to-date cost incurred in the territory."
+
+      - name: country_region_code
+        description: "The code for the country or region where the territory is located."
+
+      - name: group
+        description: "The group to which the territory belongs."
+
+      - name: name
+        description: "The name of the sales territory."
+
+      - name: sales_last_year
+        description: "The total sales generated in the territory during the previous year."
+
+      - name: sales_ytd
+        description: "The year-to-date sales generated in the territory."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+# stg_salesterritoryhistory
+  - name: stg_salesterritoryhistory
+    description: "A staging model for sales territory history data, selecting necessary columns from the source."
+    columns:
+      - name: territory_id
+        description: "The unique identifier for the sales territory."
+      
+      - name: business_entity_id
+        description: "The unique identifier for the business entity associated with the sales territory."
+
+      - name: end_date
+        description: "The end date of the sales territory association."
+
+      - name: start_date
+        description: "The start date of the sales territory association."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
