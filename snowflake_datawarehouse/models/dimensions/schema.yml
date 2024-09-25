@@ -1,0 +1,301 @@
+version: 2
+
+models:
+
+# dim_customer
+  - name: dim_customer
+    description: "Dimension table for customer data."
+    columns:
+      - name: customer_key
+        description: "The unique identifier for each customer."
+        tests:
+          - not_null   # Ensures that every customer_id is populated
+          - unique     # Ensures that customer_id is unique
+          
+      - name: account_number
+        description: "The account number associated with the customer."
+      
+      - name: email_address
+        description: "The customer's email address."
+      
+      - name: email_promotion
+        description: "A numeric value indicating the level of email promotion engagement."
+      
+      - name: email_promotion_segment
+        description: "Segment categorizing customers based on email promotion engagement."
+      
+      - name: first_name
+        description: "The first name of the customer."
+      
+      - name: last_name
+        description: "The last name of the customer."
+      
+      - name: middle_name
+        description: "The middle name of the customer."
+      
+      - name: person_type
+        description: "Indicates the type of person (individual, store, etc.)."
+      
+      - name: sales_location
+        description: "The geographical sales location associated with the customer."
+      
+      - name: us_customer
+        description: "Indicates whether the customer is from the US or Non-US."
+        tests:
+          - accepted_values:
+              values: ['US', 'Non-US']  # Ensures that the values are only 'US' or 'Non-US'
+              quote: true               # This ensures that the values are treated as strings
+
+# dim_date
+  - name: dim_date
+    description: "Dimension table for date-related data."
+    columns:
+      - name: date_key
+        description: "The unique identifier for each date (in YYYYMMDD format)."
+        tests:
+          - not_null   # Ensures date_key is populated
+          - unique     # Ensures each date_key is unique
+
+      - name: day_of_month
+        description: "The day of the month."
+
+      - name: day_of_week
+        description: "The day of the week."
+
+      - name: day_of_week_iso
+        description: "ISO standard day of the week."
+
+      - name: day_of_week_name
+        description: "The name of the day of the week (e.g., Monday)."
+
+      - name: day_of_week_name_short
+        description: "Short name of the day of the week (e.g., Mon)."
+
+      - name: day_of_year
+        description: "The day number in the year."
+
+      - name: iso_week_end_date
+        description: "The end date of the ISO week."
+
+      - name: iso_week_of_year
+        description: "The ISO week number in the year."
+
+      - name: iso_week_start_date
+        description: "The start date of the ISO week."
+
+      - name: month_end_date
+        description: "The end date of the month."
+
+      - name: month_name
+        description: "The full name of the month (e.g., January)."
+
+      - name: month_name_short
+        description: "The abbreviated name of the month (e.g., Jan)."
+
+      - name: month_of_year
+        description: "The month number in the year."
+
+      - name: month_start_date
+        description: "The start date of the month."
+
+      - name: next_date_day
+        description: "The next day’s date."
+
+      - name: prior_date_day
+        description: "The previous day’s date."
+
+      - name: prior_year_date_day
+        description: "The same day in the prior year."
+
+      - name: prior_year_iso_week_end_date
+        description: "The end date of the ISO week in the prior year."
+
+      - name: prior_year_iso_week_of_year
+        description: "The ISO week number in the prior year."
+
+      - name: prior_year_iso_week_start_date
+        description: "The start date of the ISO week in the prior year."
+
+      - name: prior_year_month_end_date
+        description: "The end date of the month in the prior year."
+
+      - name: prior_year_month_start_date
+        description: "The start date of the month in the prior year."
+
+      - name: prior_year_over_year_date_day
+        description: "Year-over-year comparison date in the prior year."
+
+      - name: prior_year_week_end_date
+        description: "The end date of the week in the prior year."
+
+      - name: prior_year_week_of_year
+        description: "The week number in the prior year."
+
+      - name: prior_year_week_start_date
+        description: "The start date of the week in the prior year."
+
+      - name: quarter_end_date
+        description: "The end date of the quarter."
+
+      - name: quarter_of_year
+        description: "The quarter number in the year."
+
+      - name: quarter_start_date
+        description: "The start date of the quarter."
+
+      - name: week_end_date
+        description: "The end date of the week."
+
+      - name: week_of_year
+        description: "The week number in the year."
+
+      - name: week_start_date
+        description: "The start date of the week."
+
+      - name: year_end_date
+        description: "The end date of the year."
+
+      - name: year_number
+        description: "The year number."
+
+      - name: year_start_date
+        description: "The start date of the year."
+
+
+# dim_salesperson
+  - name: dim_salesperson
+    description: "Dimension table for salesperson data."
+    columns:
+      - name: salesperson_key
+        description: "The unique identifier for each salesperson."
+        tests:
+          - not_null   # Ensures that every salesperson_id is populated
+          - unique     # Ensures that salesperson_id is unique
+
+      - name: birth_date
+        description: "The birth date of the salesperson."
+      
+      - name: current_sales_quota
+        description: "The current sales quota for the salesperson."
+        tests:
+          - not_null
+          - relationships:
+              field: salesperson_id
+          - expression_is_true:
+              expression: "current_sales_quota >= 0"  # Ensures no negative values
+
+      - name: gender
+        description: "The gender of the salesperson."
+        tests:
+          - accepted_values:
+              values: ['M', 'F']  # Ensures only 'M' (Male) and 'F' (Female) values
+              quote: true
+
+      - name: hire_date
+        description: "The date the salesperson was hired."
+      
+      - name: job_title
+        description: "The job title of the salesperson."
+      
+      - name: latest_quota_date
+        description: "The date of the latest sales quota assigned."
+      
+      - name: latest_sales_quota
+        description: "The latest sales quota for the salesperson."
+        tests:
+          - expression_is_true:
+              expression: "latest_sales_quota >= 0"  # Ensures no negative values
+
+      - name: marital_status
+        description: "The marital status of the salesperson."
+
+      - name: organization_level
+        description: "The organization level of the salesperson."
+        tests:
+          - expression_is_true:
+              expression: "organization_level >= 0"  # Ensures no negative values
+
+      - name: sales_last_year
+        description: "The total sales made by the salesperson last year."
+        tests:
+          - expression_is_true:
+              expression: "sales_last_year >= 0"  # Ensures no negative values
+
+      - name: sales_ytd
+        description: "The year-to-date sales for the salesperson."
+        tests:
+          - expression_is_true:
+              expression: "sales_ytd >= 0"  # Ensures no negative values
+
+      - name: sick_leave_hours
+        description: "The number of sick leave hours for the salesperson."
+        tests:
+          - expression_is_true:
+              expression: "sick_leave_hours >= 0"  # Ensures no negative values
+
+      - name: territory_id
+        description: "The identifier for the territory the salesperson is responsible for."
+        tests:
+          - expression_is_true:
+              expression: "territory_id >= 0"  # Ensures no negative values
+
+      - name: vacation_hours
+        description: "The number of vacation hours for the salesperson."
+        tests:
+          - expression_is_true:
+              expression: "vacation_hours >= 0"  # Ensures no negative values
+
+# dim_salesterritory
+  - name: dim_salesterritory
+    description: "Dimension table for sales territory data."
+    columns:
+      - name: territory_id
+        description: "The unique identifier for each sales territory."
+        tests:
+          - not_null   # Ensures that territory_id is populated
+          - unique     # Ensures that territory_id is unique
+
+      - name: country_region_code
+        description: "The country or region code for the sales territory."
+      
+      - name: group_name
+        description: "The group name of the sales territory."
+      
+      - name: name
+        description: "The name of the sales territory."
+
+      - name: sales_last_year
+        description: "The total sales for the territory in the last year."
+        tests:
+          - expression_is_true:
+              expression: "sales_last_year > 0"  # Ensures sales_last_year is not 0
+
+      - name: sales_ranking_last_year
+        description: "The sales ranking for the territory in the last year."
+        tests:
+          - expression_is_true:
+              expression: "sales_ranking_last_year > 0"  # Ensures sales_ranking_last_year is not 0
+
+      - name: sales_ranking_ytd
+        description: "The sales ranking for the territory year-to-date."
+        tests:
+          - expression_is_true:
+              expression: "sales_ranking_ytd > 0"  # Ensures sales_ranking_ytd is not 0
+
+      - name: sales_ytd
+        description: "The year-to-date sales for the territory."
+        tests:
+          - expression_is_true:
+              expression: "sales_ytd > 0"  # Ensures sales_ytd is not 0
+
+      - name: state_count
+        description: "The number of states or provinces associated with the sales territory."
+        tests:
+          - expression_is_true:
+              expression: "state_count > 0"  # Ensures state_count is not 0
+
+      - name: territory_id
+        description: "The identifier for the territory."
+        tests:
+          - expression_is_true:
+              expression: "territory_id > 0"  # Ensures territory_id is not 0

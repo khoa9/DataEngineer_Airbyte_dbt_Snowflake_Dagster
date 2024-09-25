@@ -6,15 +6,41 @@ sources:
     schema: SOURCE
 
     tables:
+      - name: src_businessentity
+        description: "Contains general information about business entities, which can represent different types of parties such as customers, employees, or vendors."
       - name: src_countryregion
+        description: "Contains data related to the country or region, including country codes and region names used for geographic information."
       - name: src_customer
+        description: "Stores customer-related information such as customer ID, account details, and contact information."
+      - name: src_department
+        description: "Contains data about the various departments in the organization, including department names and hierarchical structures."
       - name: src_emailaddress
+        description: "Stores email addresses associated with entities such as customers or employees."
+      - name: src_employee
+        description: "Holds employee-specific information including their identification, role, and employment details."
+      - name: src_person
+        description: "Stores personal details for people associated with the organization, including employees and customers."
+      - name: src_personphone
+        description: "Contains phone numbers associated with persons in the organization, including employees and customers."
       - name: src_product
+        description: "Holds details of products available in the company’s inventory, including product codes, names, and descriptions."
       - name: src_productcategory
+        description: "Defines the categories to which products belong, used for organizing and managing product types."
       - name: src_productdescription
+        description: "Provides descriptive text about the products, used for marketing or detailed product information."
       - name: src_productsubcategory
+        description: "Contains subcategories for products to provide more granularity in categorization."
       - name: src_salesorderdetail
+        description: "Stores the detailed line items for each sales order, including product, quantity, and pricing information."
       - name: src_salesperson
+        description: "Stores data related to salespeople in the organization, including their assigned territories and performance."
       - name: src_salespersonquotahistory
+        description: "Contains the historical quota information for salespersons, tracking their targets and achievements over time."
       - name: src_salesterritory
+        description: "Contains information about the sales territories, including geographic boundaries and related metadata for assigning sales regions."
       - name: src_salesterritoryhistory
+        description: "Tracks historical data on changes in sales territories, including territory reassignments and effective dates."
+      - name: src_stateprovince
+        description: "Contains data about the states and provinces, used for geographic segmentation, including state or province codes and related regions."
+      - name: src_store
+        description: "Stores data related to the retail stores associated with the company, including store name, location, and contact details."
