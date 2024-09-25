@@ -328,3 +328,84 @@ models:
 
       - name: rowg_uid
         description: "A unique identifier (UUID) for the row, used for replication purposes."
+# stg_businessentity
+  - name: stg_businessentity
+    description: "A staging model for business entities"
+    columns:
+      - name: business_entity_id
+        description: "Unique identifier for a business entity"
+        tests:
+          - unique
+          - not_null
+#stg_salesorderheader
+  - name: stg_sales_order_header
+    description: "Staging model for the SalesOrderHeader table, containing high-level information for each sales order."
+    columns:
+      - name: sales_order_id
+        description: "Unique identifier for each sales order."
+        tests:
+          - unique
+          - not_null
+
+      - name: order_date
+        description: "The date the order was placed."
+
+      - name: due_date
+        description: "The date the order is due."
+
+      - name: ship_date
+        description: "The date the order was shipped."
+
+      - name: order_status
+        description: "The current status of the order, represented as an integer."
+
+      - name: customer_id
+        description: "Identifier for the customer who placed the order."
+
+      - name: sales_person_id
+        description: "Identifier for the salesperson responsible for the order."
+
+      - name: bill_to_address_id
+        description: "Address ID where the bill is sent."
+
+      - name: ship_to_address_id
+        description: "Address ID where the order is shipped."
+# stg_currency
+  - name: stg_currency
+    description: "A staging model for currency code data, selecting necessary columns from the source."
+    columns:
+      - name: currency_code
+        description: "The unique identifier for each product."
+        tests:
+          - unique
+          - not_null  
+
+      - name: name
+        description: "The name of the currency."
+#stg_currencyrate
+  - name: stg_currency_rate
+    description: "Staging model for the CurrencyRate table, which contains daily exchange rates between different currencies."
+    columns:
+      - name: currency_rate_id
+        description: "Primary key for CurrencyRate records."
+        tests:
+          - unique
+          - not_null
+
+      - name: currency_rate_date
+        description: "Date and time the exchange rate was obtained."
+
+      - name: from_currency_code
+        description: "Exchange rate was converted from this currency code."
+
+      - name: to_currency_code
+        description: "Exchange rate was converted to this currency code."
+
+      - name: average_rate
+        description: "Average exchange rate for the day."
+
+      - name: end_of_day_rate
+        description: "Final exchange rate for the day."
+
+      - name: modified_date
+        description: "Date and time the record was last updated."

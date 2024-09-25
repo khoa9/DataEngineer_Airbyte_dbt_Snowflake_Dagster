@@ -18,3 +18,8 @@ sources:
       - name: src_salespersonquotahistory
       - name: src_salesterritory
       - name: src_salesterritoryhistory
+      - name: src_personphone
+      - name: src_businessentity
+      - name: src_salesorderheader
+      - name: src_currencyrate
+      - name: src_currency 
