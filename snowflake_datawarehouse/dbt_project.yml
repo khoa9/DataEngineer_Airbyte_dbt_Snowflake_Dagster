@@ -10,6 +10,11 @@ config-version: 2
 # This setting configures which "profile" dbt uses for this project.
 profile: 'snowflake_datawarehouse'
 
+# Define variables here
+vars:
+  start_date: '2005-01-01'         # Default start date for the date dimension
+  date_range_days: 7300           # Default range of days ( 20 years)
+
 # These configurations specify where dbt should look for different types of files.
 # The `model-paths` config, for example, states that models in this project can be
 # found in the "models/" directory. You probably won't need to change these!
