@@ -437,4 +437,174 @@ models:
           - not_null
 
       - name: name
-        description: "name of model."
+        description: "name of model." 
+
+# stg_employee
+  - name: stg_employee
+    description: "A staging model for employee data, selecting necessary columns from the source."
+    columns:
+      - name: business_entity_id
+        description: "The unique identifier for each employee."
+        tests:
+          - unique
+          - not_null
+
+      - name: birth_date
+        description: "The birth date of the employee."
+
+      - name: current_flag
+        description: "Flag indicating if the employee is currently active."
+
+      - name: gender
+        description: "The gender of the employee."
+
+      - name: hire_date
+        description: "The hire date of the employee."
+
+      - name: job_title
+        description: "The job title of the employee."
+
+      - name: login_id
+        description: "The login ID for the employee."
+
+      - name: marital_status
+        description: "The marital status of the employee."
+
+      - name: national_id_number
+        description: "The national ID number of the employee."
+
+      - name: organization_level
+        description: "The organization level of the employee."
+
+      - name: salaried_flag
+        description: "Flag indicating if the employee is salaried."
+
+      - name: sick_leave_hours
+        description: "The number of sick leave hours for the employee."
+
+      - name: vacation_hours
+        description: "The number of vacation hours for the employee."
+
+      - name: rowg_uid
+        description: "A unique identifier (UUID) for the row, used for replication purposes."
+
+  # stg_currencyrate
+  - name: stg_currencyrate
+    description: "Staging model for Currency Rate data."
+    columns:
+      - name: currency_rate_id
+        description: "Unique identifier for the currency rate."
+        tests:
+          - unique
+          - not_null
+
+      - name: currency_rate_date
+        description: "The date when the currency rate was recorded."
+
+      - name: from_currency_code
+        description: "The currency code the exchange is coming from."
+
+      - name: to_currency_code
+        description: "The currency code the exchange is going to."
+
+      - name: average_rate
+        description: "The average exchange rate for the day."
+
+      - name: end_of_day_rate
+        description: "The final exchange rate at the end of the day."
+
+      - name: modified_date
+        description: "The date when the currency rate record was last updated."
+
+  # stg_person
+  - name: stg_person
+    description: "Staging model for person data."
+    columns:
+      - name: business_entity_id
+        description: "Unique identifier for the business entity representing the person."
+        tests:
+          - unique
+          - not_null
+
+      - name: additional_contact_info
+        description: "Additional contact information for the person."
+
+      - name: demographics
+        description: "Demographic information for the person."
+
+      - name: email_promotion
+        description: "The email promotion preference for the person."
+
+      - name: first_name
+        description: "The first name of the person."
+
+      - name: last_name
+        description: "The last name of the person."
+
+      - name: middle_name
+        description: "The middle name of the person."
+
+      - name: name_style
+        description: "The name style of the person."
+
+      - name: person_type
+        description: "The type of person (e.g., employee, customer)."
+
+      - name: suffix
+        description: "Suffix for the person's name (e.g., Jr., Sr.)."
+
+      - name: title
+        description: "The title of the person (e.g., Mr., Mrs.)."
+
+      - name: rowg_uid
+        description: "Unique identifier for replication purposes."
+
+  # stg_store
+  - name: stg_store
+    description: "Staging model for store data."
+    columns:
+      - name: business_entity_id
+        description: "Unique identifier for the business entity representing the store."
+        tests:
+          - unique
+          - not_null
+
+      - name: demographics
+        description: "Demographic information for the store."
+
+      - name: name
+        description: "The name of the store."
+
+      - name: sales_person_id
+        description: "The ID of the salesperson associated with the store."
+
+      - name: rowg_uid
+        description: "Unique identifier for replication purposes."
+
+  # stg_stateprovince
+  - name: stg_stateprovince
+    description: "Staging model for state and province data."
+    columns:
+      - name: state_province_id
+        description: "Unique identifier for the state or province."
+        tests:
+          - unique
+          - not_null
+
+      - name: state_province_code
+        description: "Code for the state or province."
+
+      - name: name
+        description: "Name of the state or province."
+
+      - name: country_region_code
+        description: "Code representing the country or region associated with the state or province."
+
+      - name: is_only_state_province_flag
+        description: "Flag indicating if this is the only state or province in the country/region."
+
+      - name: territory_id
+        description: "Identifier for the sales territory."
+
+      - name: rowg_uid
+        description: "Unique identifier for replication purposes."

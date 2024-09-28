@@ -397,3 +397,44 @@ models:
 
       - name: tax_amount
         description: "The tax amount for the line item, calculated as 10% of the net sales amount."
+# dim_salesdetail:
+  - name: dim_saledetails  # Name of the dimension model
+    description: "Dimension table for sales order line item details. Each row represents a product within a sales order."
+    columns:
+      - name: sales_detail_key
+        description: "Unique identifier for the sales order line item."
+        tests:
+          - unique
+          - not_null
+
+      - name: sales_order_key
+        description: "Foreign key linking to FactSalesOrderHeader."
+        tests:
+          - relationships:
+              to: ref('fact_salesorderheader')
+              field: sales_order_key
+
+      - name: product_key
+        description: "Foreign key linking to DimProduct, representing the product in the order."
+        tests:
+          - relationships:
+              to: ref('dim_product')
+              field: product_key
+
+      - name: order_quantity
+        description: "The quantity of the product ordered."
+
+      - name: unit_price
+        description: "The price per unit of the product."
+
+      - name: unit_price_discount
+        description: "The discount applied to the unit price."
+
+      - name: sales_amount
+        description: "The total sales amount for the product line, calculated as order_quantity * unit_price."
+
+      - name: discount_amount
+        description: "The total discount amount for the product line, calculated as order_quantity * unit_price_discount."
+
+      - name: line_total
+        description: "The total amount for the line, including any discounts and adjustments."
