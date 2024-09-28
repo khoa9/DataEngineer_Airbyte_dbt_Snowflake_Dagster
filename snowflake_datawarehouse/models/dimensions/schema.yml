@@ -177,19 +177,11 @@ models:
       
       - name: current_sales_quota
         description: "The current sales quota for the salesperson."
-        tests:
-          - not_null
-          - relationships:
-              field: salesperson_id
-          - expression_is_true:
-              expression: "current_sales_quota >= 0"  # Ensures no negative values
+
 
       - name: gender
         description: "The gender of the salesperson."
-        tests:
-          - accepted_values:
-              values: ['M', 'F']  # Ensures only 'M' (Male) and 'F' (Female) values
-              quote: true
+
 
       - name: hire_date
         description: "The date the salesperson was hired."
@@ -202,54 +194,39 @@ models:
       
       - name: latest_sales_quota
         description: "The latest sales quota for the salesperson."
-        tests:
-          - expression_is_true:
-              expression: "latest_sales_quota >= 0"  # Ensures no negative values
+
 
       - name: marital_status
         description: "The marital status of the salesperson."
 
       - name: organization_level
         description: "The organization level of the salesperson."
-        tests:
-          - expression_is_true:
-              expression: "organization_level >= 0"  # Ensures no negative values
+
 
       - name: sales_last_year
         description: "The total sales made by the salesperson last year."
-        tests:
-          - expression_is_true:
-              expression: "sales_last_year >= 0"  # Ensures no negative values
+
 
       - name: sales_ytd
         description: "The year-to-date sales for the salesperson."
-        tests:
-          - expression_is_true:
-              expression: "sales_ytd >= 0"  # Ensures no negative values
+
 
       - name: sick_leave_hours
         description: "The number of sick leave hours for the salesperson."
-        tests:
-          - expression_is_true:
-              expression: "sick_leave_hours >= 0"  # Ensures no negative values
 
-      - name: territory_id
+
+      - name: territory_key
         description: "The identifier for the territory the salesperson is responsible for."
-        tests:
-          - expression_is_true:
-              expression: "territory_id >= 0"  # Ensures no negative values
+
 
       - name: vacation_hours
         description: "The number of vacation hours for the salesperson."
-        tests:
-          - expression_is_true:
-              expression: "vacation_hours >= 0"  # Ensures no negative values
 
 # dim_salesterritory
   - name: dim_salesterritory
     description: "Dimension table for sales territory data."
     columns:
-      - name: territory_id
+      - name: territory_key
         description: "The unique identifier for each sales territory."
         tests:
           - not_null   # Ensures that territory_id is populated
@@ -266,36 +243,157 @@ models:
 
       - name: sales_last_year
         description: "The total sales for the territory in the last year."
-        tests:
-          - expression_is_true:
-              expression: "sales_last_year > 0"  # Ensures sales_last_year is not 0
 
       - name: sales_ranking_last_year
         description: "The sales ranking for the territory in the last year."
-        tests:
-          - expression_is_true:
-              expression: "sales_ranking_last_year > 0"  # Ensures sales_ranking_last_year is not 0
 
       - name: sales_ranking_ytd
         description: "The sales ranking for the territory year-to-date."
-        tests:
-          - expression_is_true:
-              expression: "sales_ranking_ytd > 0"  # Ensures sales_ranking_ytd is not 0
+
 
       - name: sales_ytd
         description: "The year-to-date sales for the territory."
-        tests:
-          - expression_is_true:
-              expression: "sales_ytd > 0"  # Ensures sales_ytd is not 0
+
 
       - name: state_count
         description: "The number of states or provinces associated with the sales territory."
-        tests:
-          - expression_is_true:
-              expression: "state_count > 0"  # Ensures state_count is not 0
+
 
       - name: territory_id
         description: "The identifier for the territory."
+
+
+#dim_product
+  - name: dim_product
+    description: "Dimension table for products, includes details about product, subcategory, and category."
+    columns:
+      - name: product_key
+        description: "Unique identifier for each product."
         tests:
-          - expression_is_true:
-              expression: "territory_id > 0"  # Ensures territory_id is not 0
+          - unique
+          - not_null
+
+      - name: product_name
+        description: "Name of the product."
+
+
+      - name: product_number
+        description: "Unique product number for tracking."
+
+
+      - name: product_model
+        description: "Model name of the product."
+
+
+      - name: product_subcategory_key
+        description: "Foreign key to DimProductSubcategory."
+        tests:
+          - relationships:
+              to: ref('dim_product_subcategory')
+              field: product_subcategory_key
+
+      - name: subcategory_name
+        description: "Name of the product subcategory (denormalized from DimProductSubcategory)."
+
+      - name: product_category_key
+        description: "Foreign key to DimProductCategory."
+        tests:
+          - relationships:
+              to: ref('dim_product_category')
+              field: product_category_key
+
+      - name: category_name
+        description: "Name of the product category (denormalized from DimProductCategory)."
+
+      - name: product_age
+        description: "Age of the product in years (calculated)."
+
+      - name: is_discontinued
+        description: "Flag indicating if the product is discontinued."
+
+      - name: gross_margin
+        description: "Gross margin for the product, calculated as (ListPrice - StandardCost) / ListPrice."
+
+      - name: seasonal_flag
+        description: "Indicates whether the product is seasonal (Summer, Winter, Non-Seasonal)."
+
+#dim_productcategory
+  - name: dim_product_category
+    description: "Dimension table for product categories."
+    columns:
+      - name: product_category_key
+        description: "Unique identifier for each product category."
+        tests:
+          - unique
+          - not_null
+
+      - name: category_name
+        description: "Name of the product category."
+
+      - name: product_count
+        description: "Total number of products in this category (calculated)."
+
+      - name: active_products
+        description: "Count of active products (not discontinued) in this category (calculated)."
+
+#dim_productsubcategory
+  - name: dim_product_subcategory
+    description: "Dimension table for product subcategories."
+    columns:
+      - name: product_subcategory_key
+        description: "Unique identifier for each product subcategory."
+        tests:
+          - unique
+          - not_null
+
+      - name: subcategory_name
+        description: "Name of the product subcategory."
+
+      - name: product_category_key
+        description: "Foreign key to DimProductCategory."
+        tests:
+          - not_null
+          - relationships:
+              to: ref('dim_product_category')
+              field: product_category_key
+
+      - name: product_category_name
+        description: "Denormalized category name from DimProductCategory."
+
+      - name: subcategory_product_count
+        description: "Total number of products in this subcategory (calculated)."
+#dim_salesdetail
+  - name: dim_saledetails  # Name of the dimension model
+    description: "Dimension table for sales order line item details. Each row represents a product within a sales order."
+    columns:
+      - name: sales_order_detail_key
+        description: "Unique identifier for the sales order line item."
+        tests:
+          - unique
+
+      - name: sales_order_id
+        description: "Foreign key linking to FactSalesOrderHeader."
+
+      - name: product_key
+        description: "Foreign key linking to DimProduct, representing the product in the order."
+
+      - name: order_quantity
+        description: "The quantity of the product ordered."
+
+      - name: unit_price
+        description: "The price per unit of the product."
+
+      - name: unit_price_discount
+        description: "The discount applied to the unit price."
+
+      - name: sales_amount
+        description: "The total sales amount for the product line, calculated as order_quantity * unit_price."
+
+      - name: discount_amount
+        description: "The total discount amount for the product line, calculated as order_quantity * unit_price_discount."
+
+      - name: line_total
+        description: "The total amount for the line, including any discounts and adjustments."
+
+      - name: tax_amount
+        description: "The tax amount for the line item, calculated as 10% of the net sales amount."

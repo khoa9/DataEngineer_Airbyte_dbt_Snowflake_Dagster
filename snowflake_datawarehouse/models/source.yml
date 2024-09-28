@@ -20,8 +20,6 @@ sources:
         description: "Holds employee-specific information including their identification, role, and employment details."
       - name: src_person
         description: "Stores personal details for people associated with the organization, including employees and customers."
-      - name: src_personphone
-        description: "Contains phone numbers associated with persons in the organization, including employees and customers."
       - name: src_product
         description: "Holds details of products available in the company’s inventory, including product codes, names, and descriptions."
       - name: src_productcategory
@@ -39,16 +37,13 @@ sources:
       - name: src_salesterritory
         description: "Contains information about the sales territories, including geographic boundaries and related metadata for assigning sales regions."
       - name: src_salesterritoryhistory
-<<<<<<< HEAD
-      - name: src_personphone
-      - name: src_businessentity
       - name: src_salesorderheader
       - name: src_currencyrate
       - name: src_currency 
-=======
         description: "Tracks historical data on changes in sales territories, including territory reassignments and effective dates."
       - name: src_stateprovince
         description: "Contains data about the states and provinces, used for geographic segmentation, including state or province codes and related regions."
       - name: src_store
         description: "Stores data related to the retail stores associated with the company, including store name, location, and contact details."
->>>>>>> d74cb998a3b894e926ccc043d434575130c9c211
+      - name: src_productmodel
+        description: "Data related to product model description "

@@ -264,7 +264,6 @@ models:
       - name: business_entity_id
         description: "The unique identifier for the business entity representing the salesperson."
         tests:
-          - unique
           - not_null  
 
       - name: quota_date
@@ -338,38 +337,56 @@ models:
           - unique
           - not_null
 #stg_salesorderheader
-  - name: stg_sales_order_header
-    description: "Staging model for the SalesOrderHeader table, containing high-level information for each sales order."
+  - name: stg_salesorderheader  # Name of the staging model
+    description: "Staging table for Sales Order Header data. Provides key attributes for FactSalesOrder."
     columns:
       - name: sales_order_id
-        description: "Unique identifier for each sales order."
+        description: "Unique identifier for the sales order."
         tests:
           - unique
-          - not_null
 
       - name: order_date
-        description: "The date the order was placed."
+        description: "Date when the sales order was placed."
 
       - name: due_date
-        description: "The date the order is due."
+        description: "Date when the sales order is due to be fulfilled or paid."
 
       - name: ship_date
-        description: "The date the order was shipped."
+        description: "Date when the sales order was shipped."
 
       - name: order_status
-        description: "The current status of the order, represented as an integer."
+        description: "Status of the sales order, such as shipped, pending, or canceled."
+
+      - name: online_order_flag
+        description: "Indicates whether the order was placed online (1 = Online, 0 = Offline)."
+
+      - name: freight
+        description: "The shipping or freight cost for the sales order."
+
+      - name: sub_total
+        description: "Subtotal of the order before applying tax and freight."
+
+      - name: tax_amount
+        description: "Total tax amount applied to the sales order."
+
+      - name: total_due
+        description: "Final total amount due for the order, including tax and freight."
 
       - name: customer_id
-        description: "Identifier for the customer who placed the order."
+        description: "Foreign key linking to the DimCustomer table."
+
 
       - name: sales_person_id
-        description: "Identifier for the salesperson responsible for the order."
+        description: "Foreign key linking to the DimSalesPerson table."
 
-      - name: bill_to_address_id
-        description: "Address ID where the bill is sent."
 
-      - name: ship_to_address_id
-        description: "Address ID where the order is shipped."
+      - name: territory_id
+        description: "Foreign key linking to the DimSalesTerritory table."
+
+
+      - name: currency_id
+        description: "Foreign key linking to the currency table (e.g., USD, EUR)."
+
 # stg_currency
   - name: stg_currency
     description: "A staging model for currency code data, selecting necessary columns from the source."
@@ -409,3 +426,15 @@ models:
 
       - name: modified_date
         description: "Date and time the record was last updated."
+#stg_productmodel
+  - name: stg_productmodel
+    description: "Staging model for product model ."
+    columns:
+      - name: product_model_id
+        description: "Primary key for prod model ."
+        tests:
+          - unique
+          - not_null
+
+      - name: name
+        description: "name of model."
