@@ -1,7 +1,7 @@
 -- Reference to the source created in source.yml file
 WITH source AS (
     SELECT * 
-    FROM {{ source('snowflake_src', 'src_salesorderheader') }}
+    FROM {{ source('snowflake_src', 'src_SalesOrderHeader') }}
 )
 
 -- Select only the columns relevant for the FactSalesOrder table, including new columns

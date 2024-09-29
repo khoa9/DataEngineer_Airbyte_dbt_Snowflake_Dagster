@@ -6,44 +6,90 @@ sources:
     schema: SOURCE
 
     tables:
-      - name: src_businessentity
+      - name: src_BusinessEntity
         description: "Contains general information about business entities, which can represent different types of parties such as customers, employees, or vendors."
-      - name: src_countryregion
+        identifier: src_businessentity
+
+      - name: src_CountryRegion
         description: "Contains data related to the country or region, including country codes and region names used for geographic information."
-      - name: src_customer
+        identifier: src_countryregion
+
+      - name: src_Customer
         description: "Stores customer-related information such as customer ID, account details, and contact information."
-      - name: src_department
+        identifier: src_customer
+
+      - name: src_Department
         description: "Contains data about the various departments in the organization, including department names and hierarchical structures."
-      - name: src_emailaddress
+        identifier: src_department
+
+      - name: src_EmailAddress
         description: "Stores email addresses associated with entities such as customers or employees."
-      - name: src_employee
+        identifier: src_emailaddress
+
+      - name: src_Employee
         description: "Holds employee-specific information including their identification, role, and employment details."
-      - name: src_person
+        identifier: src_employee
+
+      - name: src_Person
         description: "Stores personal details for people associated with the organization, including employees and customers."
-      - name: src_product
+        identifier: src_person
+
+      - name: src_Product
         description: "Holds details of products available in the company’s inventory, including product codes, names, and descriptions."
-      - name: src_productcategory
+        identifier: src_product 
+
+      - name: src_ProductCategory
         description: "Defines the categories to which products belong, used for organizing and managing product types."
-      - name: src_productdescription
+        identifier: src_productcategory
+
+      - name: src_ProductDescription
         description: "Provides descriptive text about the products, used for marketing or detailed product information."
-      - name: src_productsubcategory
+        identifier: src_productdescription
+
+      - name: src_ProductSubcategory
         description: "Contains subcategories for products to provide more granularity in categorization."
-      - name: src_salesorderdetail
+        identifier: src_productsubcategory
+
+      - name: src_SalesOrderDetail
         description: "Stores the detailed line items for each sales order, including product, quantity, and pricing information."
-      - name: src_salesperson
+        identifier: src_salesorderdetail
+
+      - name: src_SalesPerson
         description: "Stores data related to salespeople in the organization, including their assigned territories and performance."
-      - name: src_salespersonquotahistory
+        identifier: src_salesperson
+
+      - name: src_SalesPersonQuotaHistory
         description: "Contains the historical quota information for salespersons, tracking their targets and achievements over time."
-      - name: src_salesterritory
+        identifier: src_salespersonquotahistory
+
+      - name: src_SalesTerritory
         description: "Contains information about the sales territories, including geographic boundaries and related metadata for assigning sales regions."
-      - name: src_salesterritoryhistory
-      - name: src_salesorderheader
-      - name: src_currencyrate
-      - name: src_currency 
+        identifier: src_salesterritory
+
+      - name: src_SalesTerritoryHistory
         description: "Tracks historical data on changes in sales territories, including territory reassignments and effective dates."
-      - name: src_stateprovince
+        identifier: src_salesterritoryhistory
+
+      - name: src_SalesOrderHeader
+        description: "Stores information about sales orders, including customer details, order dates, shipping addresses, and total amounts for each order."
+        identifier: src_salesorderheader
+
+      - name: src_CurrencyRate
+        description: "Contains historical exchange rates between currencies, including rate type, effective date, and conversion factors."
+        identifier: src_currencyrate
+
+      - name: src_Currency 
+        description: "Stores information related to various currencies used in transactions, including currency codes and symbols."
+        identifier: src_currency
+
+      - name: src_StateProvince
         description: "Contains data about the states and provinces, used for geographic segmentation, including state or province codes and related regions."
-      - name: src_store
+        identifier: src_stateprovince
+
+      - name: src_Store
         description: "Stores data related to the retail stores associated with the company, including store name, location, and contact details."
-      - name: src_productmodel
-        description: "Data related to product model description "
+        identifier: src_store
+
+      - name: src_ProductModel
+        description: "Data related to product model description."
+        identifier: src_productmodel
