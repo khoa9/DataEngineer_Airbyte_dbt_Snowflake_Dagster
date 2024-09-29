@@ -11,8 +11,7 @@
 	<img src="https://img.shields.io/badge/dbt-white?logo=dbt" alt="dbt">
 	<img src="https://img.shields.io/badge/Airbyte-white?logo=airbyte" alt="airbyte">
 	<img src="https://img.shields.io/badge/Snowflake-white?logo=snowflake" alt="Snowflake">
-    <img src="https://img.shields.io/badge/Dagster-purple?logo=dagster&logoColor=blue
-    " alt="Dagster">
+   <img src="https://img.shields.io/badge/Dagster-white?logo=dagster" alt="Dagster">
 </p>
 <hr>
 
