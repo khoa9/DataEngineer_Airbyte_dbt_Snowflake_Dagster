@@ -5,6 +5,6 @@ with source as (
 
 -- Select only required columns
 SELECT 
-    currencycode as currency_code,
+    DISTINCT currencycode as currency_code,
     name
 FROM source 
