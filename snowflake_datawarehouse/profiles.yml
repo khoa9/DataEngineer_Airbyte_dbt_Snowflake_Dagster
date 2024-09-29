@@ -1,13 +1,13 @@
 snowflake_datawarehouse:
   outputs:
     dev:
-      account: gqa15546.east-us-2.azure
+      account: <your_snowflake_account>
       database: AIRBYTE_DATABASE
-      password: Sifoftheraven1!
+      password: <user_password>
       role: ACCOUNTADMIN
       schema: SOURCE
       threads: 1
       type: snowflake
       user: BACHKHOA144
       warehouse: AIRBYTE_WAREHOUSE
-  target: dev
+  target: devß
