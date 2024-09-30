@@ -1,6 +1,6 @@
 -- Reference to the source created in source.yml file
 with source as (
-    SELECT * FROM {{ source('snowflake_src', 'src_customer') }}
+    SELECT * FROM {{ source('snowflake_src', 'src_Customer') }}
 )
 
 -- Select only required columns
