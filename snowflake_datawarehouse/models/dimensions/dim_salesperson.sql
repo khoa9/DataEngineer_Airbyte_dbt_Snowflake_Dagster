@@ -10,6 +10,7 @@ WITH latest_sales_quota AS (
 
 SELECT
     s.business_entity_id as salesperson_key,
+    s.territory_id as territory_key,
     e.birth_date,
     e.gender,
     e.hire_date,
