@@ -1,5 +1,6 @@
 SELECT 
     c.customer_id as customer_key,
+    c.territory_id as territory_key,
     c.account_number,
     p.first_name,
     p.last_name,
