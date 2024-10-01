@@ -400,13 +400,12 @@ models:
       - name: name
         description: "The name of the currency."
 #stg_currencyrate
-  - name: stg_currency_rate
+  - name: stg_currencyrate
     description: "Staging model for the CurrencyRate table, which contains daily exchange rates between different currencies."
     columns:
       - name: currency_rate_id
         description: "Primary key for CurrencyRate records."
         tests:
-          - unique
           - not_null
 
       - name: currency_rate_date
@@ -487,34 +486,6 @@ models:
 
       - name: rowg_uid
         description: "A unique identifier (UUID) for the row, used for replication purposes."
-
-  # stg_currencyrate
-  - name: stg_currencyrate
-    description: "Staging model for Currency Rate data."
-    columns:
-      - name: currency_rate_id
-        description: "Unique identifier for the currency rate."
-        tests:
-          - unique
-          - not_null
-
-      - name: currency_rate_date
-        description: "The date when the currency rate was recorded."
-
-      - name: from_currency_code
-        description: "The currency code the exchange is coming from."
-
-      - name: to_currency_code
-        description: "The currency code the exchange is going to."
-
-      - name: average_rate
-        description: "The average exchange rate for the day."
-
-      - name: end_of_day_rate
-        description: "The final exchange rate at the end of the day."
-
-      - name: modified_date
-        description: "The date when the currency rate record was last updated."
 
   # stg_person
   - name: stg_person

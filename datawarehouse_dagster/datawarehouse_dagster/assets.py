@@ -14,8 +14,8 @@ airbyte_instance = AirbyteResource(
     host="localhost",
     port="8000",
     # If using basic auth, include username and password:
-    username="airbyte",
-    password="password"
+    username="k8trann1998@gmail.com",
+    password="tvmT2K4297VAN6iYdmJNoZ2lyvznFanK"
 )
 
 airbyte_assets = load_assets_from_airbyte_instance(airbyte_instance, key_prefix=["snowflake_src"])

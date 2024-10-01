@@ -5,5 +5,5 @@ with source as (
 
 -- Select only required columns
 SELECT 
-    businessentityid as business_entity_id
+    DISTINCT businessentityid as business_entity_id
 FROM source 

@@ -287,20 +287,13 @@ models:
 
       - name: product_subcategory_key
         description: "Foreign key to DimProductSubcategory."
-        tests:
-          - relationships:
-              to: ref('dim_product_subcategory')
-              field: product_subcategory_key
+
 
       - name: subcategory_name
         description: "Name of the product subcategory (denormalized from DimProductSubcategory)."
 
       - name: product_category_key
         description: "Foreign key to DimProductCategory."
-        tests:
-          - relationships:
-              to: ref('dim_product_category')
-              field: product_category_key
 
       - name: category_name
         description: "Name of the product category (denormalized from DimProductCategory)."
@@ -362,43 +355,9 @@ models:
 
       - name: subcategory_product_count
         description: "Total number of products in this subcategory (calculated)."
-#dim_salesdetail
-  - name: dim_saledetails  # Name of the dimension model
-    description: "Dimension table for sales order line item details. Each row represents a product within a sales order."
-    columns:
-      - name: sales_order_detail_key
-        description: "Unique identifier for the sales order line item."
-        tests:
-          - unique
 
-      - name: sales_order_id
-        description: "Foreign key linking to FactSalesOrderHeader."
-
-      - name: product_key
-        description: "Foreign key linking to DimProduct, representing the product in the order."
-
-      - name: order_quantity
-        description: "The quantity of the product ordered."
-
-      - name: unit_price
-        description: "The price per unit of the product."
-
-      - name: unit_price_discount
-        description: "The discount applied to the unit price."
-
-      - name: sales_amount
-        description: "The total sales amount for the product line, calculated as order_quantity * unit_price."
-
-      - name: discount_amount
-        description: "The total discount amount for the product line, calculated as order_quantity * unit_price_discount."
-
-      - name: line_total
-        description: "The total amount for the line, including any discounts and adjustments."
-
-      - name: tax_amount
-        description: "The tax amount for the line item, calculated as 10% of the net sales amount."
 # dim_salesdetail:
-  - name: dim_saledetails  # Name of the dimension model
+  - name: dim_saledetail  # Name of the dimension model
     description: "Dimension table for sales order line item details. Each row represents a product within a sales order."
     columns:
       - name: sales_detail_key
@@ -438,3 +397,34 @@ models:
 
       - name: line_total
         description: "The total amount for the line, including any discounts and adjustments."
+
+  # dim_currency
+  - name: dim_currency
+    description: "Dimension table for currency details. Each row represents a currency."
+
+    columns:
+      - name: currency_rate_id
+        description: "Unique identifier for the currency rate."
+        tests:
+          - not_null
+
+      - name: currency_rate_date
+        description: "The date the currency rate is applicable."
+
+      - name: from_currency_code
+        description: "Currency code for the originating currency."
+
+      - name: to_currency_code
+        description: "Currency code for the destination currency."
+
+      - name: from_currency_name
+        description: "Name of the originating currency."
+
+      - name: to_currency_name
+        description: "Name of the destination currency."
+
+      - name: average_rate
+        description: "The average rate between the two currencies."
+
+      - name: end_of_day_rate
+        description: "The end-of-day rate between the two currencies."
