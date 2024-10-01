@@ -1,9 +1,9 @@
 snowflake_datawarehouse:
   outputs:
     dev:
-      account: gqa15546.east-us-2.azure
+      account: <snowflake_id>
       database: AIRBYTE_DATABASE
-      password: Sifoftheraven1!
+      password: <password>
       role: ACCOUNTADMIN
       schema: SOURCE
       threads: 1
